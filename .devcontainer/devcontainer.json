@@ -1,0 +1,20 @@
+{
+    "name": "homl-learning",
+    "dockerFile": "Dockerfile",
+    "runArgs": ["--gpus", "all"],
+    "settings": {
+        "python.defaultInterpreterPath": "/usr/bin/python"
+    },
+
+    "postCreateCommand": "pip install -r requirements.txt",
+
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-toolsai.jupyter",
+                "ms-python.python"
+            ]
+        }
+    }
+}
+
