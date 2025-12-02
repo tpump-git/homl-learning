@@ -55,6 +55,57 @@ Finally, start Jupyter:
 
 If you need further instructions, read the [detailed installation instructions](INSTALL.md).
 
+### Using this project on multiple machines with Conda
+
+If you want to work on this project from multiple computers (for example a desktop and a laptop), the recommended workflow is:
+
+1. On each machine, install Anaconda or Miniconda and Git.
+2. On the **first** machine:
+   * Clone the repo and create the Conda environment:
+     
+         git clone https://github.com/ageron/handson-ml2.git
+         cd handson-ml2
+         conda env create -f environment.yml
+         conda activate tf2
+   * Optionally register the kernel (once per machine):
+     
+         python -m ipykernel install --user --name=tf2
+3. Commit and push your work to GitHub as you make changes:
+     
+         git status
+         git add <files you changed>
+         git commit -m "Your message"
+         git push
+4. On any **other** machine:
+   * Clone the repo (first time only):
+     
+         git clone https://github.com/ageron/handson-ml2.git
+         cd handson-ml2
+   * Create or update the Conda environment from `environment.yml`:
+     
+         conda env create -f environment.yml   # first time
+         conda env update -f environment.yml   # when the file changes
+   * Activate the environment and start Jupyter:
+     
+         conda activate tf2
+         jupyter notebook
+5. To create and run new Python scripts in this project, activate the `tf2` environment, then:
+     
+         conda activate tf2
+         python your_script.py
+
+### Verifying that TensorFlow can see your GPU
+
+After activating the `tf2` environment (on any machine), you can quickly check that TensorFlow sees your NVIDIA GPU:
+
+```python
+import tensorflow as tf
+print(tf.__version__)
+print(tf.config.list_physical_devices("GPU"))
+```
+
+If at least one GPU is listed, GPU support is working (assuming you have installed a compatible NVIDIA driver and CUDA/cuDNN stack for `tensorflow~=2.6.0`).
+
 # FAQ
 
 **Which Python version should I use?**
